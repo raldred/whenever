@@ -1,6 +1,6 @@
 Capistrano::Configuration.instance(:must_exist).load do
   _cset(:whenever_roles)        { :db }
-  _cset(:whenever_command)      { "whenever" }
+  _cset(:whenever_command)      { File.exists?('Gemfile') ? "bundle exec whenever" : "whenever" }
   _cset(:whenever_identifier)   { fetch :application }
   _cset(:whenever_environment)  { fetch :rails_env, "production" }
   _cset(:whenever_update_flags) { "--update-crontab #{fetch :whenever_identifier} --set environment=#{fetch :whenever_environment}" }
